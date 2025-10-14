@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mon Site — Accueil</title>
+    <meta name="description" content="Un site statique élégant avec Tailwind CSS, prêt pour GitHub Pages." />
+
+    <!-- Tailwind via CDN (Play CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Config Tailwind rapide (palette, typo, conteneur)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Ubuntu', 'Cantarell', 'Noto Sans', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f1f7ff',
+                            100: '#e3efff',
+                            200: '#c3dcff',
+                            300: '#9cc3ff',
+                            400: '#6ba3ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    },
+                    boxShadow: {
+                        soft: '0 10px 30px -10px rgba(0,0,0,0.15)'
+                    }
+                },
+                container: { center: true, padding: '1rem' }
+            }
+        }
+    </script>
+    <!-- Inter (optionnel) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans text-slate-800 bg-white selection:bg-brand-100 selection:text-brand-800">
+
+<!-- Header / Nav -->
+<header class="border-b border-slate-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+    <div class="container flex items-center gap-4 py-3">
+        <a href="index.html" class="inline-flex items-center gap-2 text-xl font-extrabold text-slate-900">
+            <span class="inline-block h-8 w-8 rounded-lg bg-brand-600 text-white grid place-items-center shadow-soft">M</span>
+            MonSite
+        </a>
+
+        <button id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false"
+                class="ml-auto md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-slate-200">
+            ☰
+        </button>
+
+        <nav id="nav" class="hidden md:flex items-center gap-1 ml-auto">
+            <a href="index.html" class="px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">Accueil</a>
+            <a href="about.html" class="px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">À propos</a>
+            <a href="#contact" id="goContact" class="px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">Contact</a>
+            <a href="about.html"
+               class="hidden md:inline-flex px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition font-semibold shadow-soft">En savoir plus</a>
+        </nav>
+    </div>
+
+    <!-- Menu mobile -->
+    <div id="mobileNav" class="md:hidden hidden border-t border-slate-200">
+        <div class="container py-2 flex flex-col">
+            <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">Accueil</a>
+            <a href="about.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">À propos</a>
+            <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contact</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-white"></div>
+        <div class="container grid md:grid-cols-2 gap-8 py-16 md:py-24">
+            <div class="flex flex-col justify-center">
+                <p class="inline-block text-xs tracking-widest uppercase text-brand-700/80 font-bold mb-3">Prêt pour GitHub Pages</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900">
+                    Lancez un site <span class="text-brand-600">élégant</span> en quelques minutes.
+                </h1>
+                <p class="mt-4 text-lg text-slate-600">
+                    Modèle léger en HTML + Tailwind CSS. Responsive, rapide, et super simple à publier.
+                </p>
+                <div class="mt-6 flex gap-3">
+                    <a href="about.html"
+                       class="inline-flex items-center px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-700 transition shadow-soft">Découvrir</a>
+                    <a href="#contact"
+                       class="inline-flex items-center px-5 py-3 rounded-xl border border-slate-300 text-slate-800 font-semibold hover:bg-slate-50 transition">Contact</a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="aspect-[4/3] rounded-2xl border border-slate-200 bg-white shadow-soft grid place-items-center">
+                    <div class="text-center px-6">
+                        <div class="text-6xl mb-3">✨</div>
+                        <p class="text-slate-700 font-medium">Placez ici une image/illustration (images/hero.png)</p>
+                        <p class="text-sm text-slate-500 mt-1">Ajoutez vos visuels quand vous voulez</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="container py-12 md:py-16">
+        <div class="grid md:grid-cols-3 gap-6">
+            <article class="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-soft transition">
+                <h2 class="text-xl font-bold text-slate-900">Rapide</h2>
+                <p class="mt-2 text-slate-600">Fichiers statiques, chargement ultra rapide, SEO friendly.</p>
+            </article>
+            <article class="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-soft transition">
+                <h2 class="text-xl font-bold text-slate-900">Modulable</h2>
+                <p class="mt-2 text-slate-600">Ajoutez des pages, sections et composants facilement.</p>
+            </article>
+            <article class="p-6 rounded-2xl border border-slate-200 bg-white hover:shadow-soft transition">
+                <h2 class="text-xl font-bold text-slate-900">Gratuit</h2>
+                <p class="mt-2 text-slate-600">Fonctionne parfaitement avec GitHub Pages, sans serveur.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="bg-slate-50 border-y border-slate-200">
+        <div class="container py-12 md:py-16">
+            <div class="max-w-xl">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Contact</h2>
+                <p class="mt-2 text-slate-600">Écrivez-nous et on vous répond vite.</p>
+                <form id="contactForm" class="mt-6 grid gap-4">
+                    <label class="grid gap-2">
+                        <span class="text-sm font-medium text-slate-700">Votre nom</span>
+                        <input type="text" name="name" required placeholder="Ada Lovelace"
+                               class="rounded-xl border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-200/60" />
+                    </label>
+                    <label class="grid gap-2">
+                        <span class="text-sm font-medium text-slate-700">Votre email</span>
+                        <input type="email" name="email" required placeholder="vous@exemple.com"
+                               class="rounded-xl border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-200/60" />
+                    </label>
+                    <label class="grid gap-2">
+                        <span class="text-sm font-medium text-slate-700">Message</span>
+                        <textarea name="message" required placeholder="Bonjour !"
+                                  class="min-h-[120px] rounded-xl border-slate-300 focus:border-brand-500 focus:ring focus:ring-brand-200/60"></textarea>
+                    </label>
+                    <button type="submit"
+                            class="inline-flex w-fit items-center px-5 py-3 rounded-xl bg-brand-600 text-white font-semibold hover:bg-brand-700 transition shadow-soft">
+                        Envoyer
+                    </button>
+                    <p id="formMsg" class="text-sm text-slate-600" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="container py-10 text-center text-slate-500">
+    © <span id="year"></span> MonSite. Tous droits réservés.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
