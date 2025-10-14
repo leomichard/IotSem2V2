@@ -1,10 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <title>Flow AI — Technology</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-darkbg text-white font-body">
+<header class="bg-darkbg/80 backdrop-blur border-b border-primary2/20 py-4 px-6 flex items-center gap-4">
+    <img src="assets/logo.png" class="h-8" />
+    <span class="text-white font-title text-lg">FLOW AI — Architecture</span>
+</header>
 
+<section class="container mx-auto px-6 py-16">
+    <h1 class="text-3xl font-title mb-6">Dual MCU Architecture</h1>
+    <p class="text-gray-300 mb-8 max-w-2xl">
+        The STM32 handles sensor-level interruptions and guarantees real-time consistency...
+    </p>
+
+    <div class="border border-primary1/30 rounded-lg p-8">
+        <p class="text-primary1 font-mono">STM32 → UART → Raspberry Pi → AI / Logging / Dashboard</p>
+        <p class="text-gray-400 mt-4">Place your architecture image in <code>assets/imgs/architecture.png</code></p>
+    </div>
+</section>
 </body>
 </html>

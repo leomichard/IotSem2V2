@@ -31,3 +31,4 @@ if (form) {
         if (msg) msg.textContent = 'Ouverture de votre application mail…';
     });
 }
+console.log("Flow AI site active");

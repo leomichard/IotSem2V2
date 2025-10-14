@@ -1,24 +1,26 @@
-/flow-ai-site/
+/flow-ai/
 
 │
 
-├── index.html            → Page d’accueil / Présentation (hero, vision, tech stack)
+├── index.html          → Landing page (vision + valeur ajoutée Flow AI)
 
-├── technology.html       → Architecture STM32 + Raspberry + UART (schéma, explication)
+├── technology.html     → Architecture STM32 ↔ UART ↔ Raspberry Pi
 
-├── features.html         → Fonctionnalités (IoT sync, sensor fusion, AI-ready...)
+├── features.html       → Capteurs, sensor fusion, IoT sync, AI-ready
 
-├── about.html            → Contexte projet, équipe, objectifs ingénierie
+├── about.html          → Objectif projet, équipe, démarche ingénierie
 
 ├── assets/
 
-│   ├── logo.png          → Ton logo (header + navbar + favicon)
+│   ├── logo.png        → (ton logo sera placé ici, header + favicon)
 
-│   ├── favicon.png       → Version réduite du logo (onglet navigateur)
+│   ├── favicon.png     → (même logo version carrée mini 32x32)
 
-│   └── imgs/             → (facultatif) schémas, photos du proto, etc.
+│   └── imgs/           → Diagrammes architecture, photos, etc.
 
-├── script.js             → (Menu mobile + interactions)
+├── script.js           → Mobile menu + animations
 
-└── tailwind.config.js    → (option si tu veux version build pro)
+└── tailwind.config.js  → (optionnel si tu veux un build plus avancé plus tard)
+
+
 

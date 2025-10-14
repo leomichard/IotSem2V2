@@ -1,76 +1,22 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mon Site — À propos</title>
-
+    <title>Flow AI — About</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Ubuntu', 'Cantarell', 'Noto Sans', 'Arial', 'sans-serif'] },
-                    colors: { brand: { 600:'#2563eb', 700:'#1d4ed8' } }
-                }
-            }
-        }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans text-slate-800 bg-white">
-
-<header class="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-50">
-    <div class="container flex items-center gap-4 py-3">
-        <a href="index.html" class="inline-flex items-center gap-2 text-xl font-extrabold text-slate-900">
-            <span class="inline-block h-8 w-8 rounded-lg bg-brand-600 text-white grid place-items-center">M</span>
-            MonSite
-        </a>
-        <button id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false"
-                class="ml-auto md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-slate-200">☰</button>
-        <nav id="nav" class="hidden md:flex items-center gap-1 ml-auto">
-            <a href="index.html" class="px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">Accueil</a>
-            <a href="about.html" class="px-3 py-2 rounded-lg bg-slate-900 text-white font-medium">À propos</a>
-            <a href="index.html#contact" class="px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">Contact</a>
-        </nav>
-    </div>
-    <div id="mobileNav" class="md:hidden hidden border-t border-slate-200">
-        <div class="container py-2 flex flex-col">
-            <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">Accueil</a>
-            <a href="about.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">À propos</a>
-            <a href="index.html#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contact</a>
-        </div>
-    </div>
-</header>
-
-<main class="container py-12 md:py-16">
-    <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900">À propos</h1>
-    <p class="mt-4 text-slate-600 max-w-3xl">
-        Ce site d'exemple est une base propre pour démarrer rapidement avec Tailwind CSS. Personalisez les composants,
-        ajoutez vos couleurs, vos images, et créez d'autres pages en copiant ce fichier.
+<body class="bg-darkbg text-white font-body">
+<section class="container mx-auto px-6 py-16">
+    <h1 class="text-4xl font-title">About Flow AI</h1>
+    <p class="mt-4 text-gray-300 max-w-2xl">
+        Flow AI was built to explore cooperative IoT design...
     </p>
 
-    <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border border-slate-200">
-            <h2 class="font-bold text-slate-900">HTML sémantique</h2>
-            <p class="mt-2 text-slate-600">Des structures propres et accessibles, prêtes pour le SEO.</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-slate-200">
-            <h2 class="font-bold text-slate-900">Navigation responsive</h2>
-            <p class="mt-2 text-slate-600">Menu mobile/desktop fluide et accessible.</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-slate-200">
-            <h2 class="font-bold text-slate-900">Formulaire mailto</h2>
-            <p class="mt-2 text-slate-600">Simple, sans backend. On peut ajouter un service de formulaires plus tard.</p>
-        </div>
+    <div class="mt-10">
+        <h2 class="text-xl font-title mb-2 text-primary1">Team</h2>
+        <p class="text-gray-400">Put team members / IDs / school logo here.</p>
     </div>
-</main>
-
-<footer class="container py-10 text-center text-slate-500">
-    © <span id="year"></span> MonSite.
-</footer>
-
-<script src="script.js"></script>
+</section>
 </body>
 </html>
