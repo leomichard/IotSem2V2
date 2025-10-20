@@ -1,18 +1,29 @@
 export default async function handler(req, res) {
-    const { message } = req.body;
+    try {
+        // Parse safely
+        const body = req.body || {};
+        const { message } = typeof body === 'string' ? JSON.parse(body) : body;
 
-    const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + process.env.MISTRALAPIKEY  // 👈 clé cachée ici
-        },
-        body: JSON.stringify({
-            model: "mistral-medium", // ou mistral-tiny si tu veux que ça soit plus rapide
-            messages: [{ role: "user", content: message }]
-        })
-    });
+        if (!message) {
+            return res.status(400).json({ error: 'Missing message in request body.' });
+        }
 
-    const data = await response.json();
-    res.status(200).json(data);
+        const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + process.env.MISTRAL_API_KEY
+            },
+            body: JSON.stringify({
+                model: "mistral-medium",
+                messages: [{ role: "user", content: message }]
+            })
+        });
+
+        const data = await response.json();
+        return res.status(200).json(data);
+    } catch (err) {
+        console.error("Error in Mistral API:", err);
+        return res.status(500).json({ error: "Internal server error." });
+    }
 }
