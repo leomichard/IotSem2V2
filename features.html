@@ -126,7 +126,7 @@
         messages.innerHTML += `<div class='text-primary1'>You: ${userMsg}</div>`;
         input.value = '';
 
-        const res = await fetch('https://iot-sem2-v2.vercel.app/', { // 🔹 ton URL proxy
+        const res = await fetch('https://iot-sem2-v2-o1p03lfz7-flow-ai-iot.vercel.app/', { // 🔹 ton URL proxy
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: userMsg })
