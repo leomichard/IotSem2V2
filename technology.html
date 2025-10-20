@@ -5,23 +5,69 @@
     <title>Flow AI — Technology</title>
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary1: '#00E5FF',
+                        primary2: '#B400FF',
+                        darkbg: '#0A0F1F'
+                    },
+                    fontFamily: {
+                        title: ['Montserrat', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
+
 <body class="bg-darkbg text-white font-body">
-<header class="bg-darkbg/80 backdrop-blur border-b border-primary2/20 py-4 px-6 flex items-center gap-4">
-    <img src="assets/logo.png" class="h-8" />
-    <span class="text-white font-title text-lg">FLOW AI — Architecture</span>
+
+<!-- HEADER (same as index) -->
+<header class="w-full fixed top-0 bg-darkbg/80 backdrop-blur-lg border-b border-primary2/20 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo.png" class="h-10" alt="Flow AI Logo">
+
+        </a>
+        <nav class="hidden md:flex gap-6 font-body">
+            <a href="technology.html" class="text-primary1">Technology</a>
+            <a href="features.html" class="hover:text-primary1 transition">Features</a>
+            <a href="about.html" class="hover:text-primary1 transition">About</a>
+        </nav>
+    </div>
 </header>
 
-<section class="container mx-auto px-6 py-16">
-    <h1 class="text-3xl font-title mb-6">Dual MCU Architecture</h1>
-    <p class="text-gray-300 mb-8 max-w-2xl">
-        The STM32 handles sensor-level interruptions and guarantees real-time consistency...
+<!-- CONTENT -->
+<section class="container mx-auto px-6 pt-28 pb-20">
+    <h1 class="text-5xl font-title mb-6 bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent">System Architecture</h1>
+    <p class="text-gray-300 mb-12 max-w-3xl leading-relaxed">
+        Flow AI integrates embedded real-time processing and cloud-ready intelligence.
+        The <span class="text-primary1">STM32</span> collects precise sensor data, ensuring accurate readings through low-level interrupts,
+        while the <span class="text-primary2">Raspberry Pi</span> manages communication, data fusion, and AI pipelines for analytics dashboards.
     </p>
 
-    <div class="border border-primary1/30 rounded-lg p-8">
-        <p class="text-primary1 font-mono">STM32 → UART → Raspberry Pi → AI / Logging / Dashboard</p>
-        <p class="text-gray-400 mt-4">Place your architecture image in <code>assets/imgs/architecture.png</code></p>
+    <div class="border border-primary1/40 rounded-2xl p-10 bg-darkbg/40 hover:shadow-[0_0_25px_#00E5FF40] transition">
+        <p class="text-primary1 font-mono text-lg text-center">STM32 → UART → Raspberry Pi → Cloud Dashboard → AI Model</p>
+        <p class="text-gray-400 mt-4 text-center">System diagram should be placed in <code>assets/imgs/architecture.png</code></p>
+    </div>
+
+    <div class="mt-14 text-center">
+        <h2 class="text-2xl font-title mb-4 text-primary1">Need Documentation?</h2>
+        <p class="text-gray-400 mb-6">Access our technical details and demo through the LINE chatbot below.</p>
+        <a href="https://line.me/R/ti/p/@305urthc?oat_content=url&ts=10201911"
+           class="bg-gradient-to-r from-primary1 to-primary2 text-darkbg font-bold px-8 py-3 rounded-full hover:scale-105 transition">
+            Contact via LINE
+        </a>
+        <div class="mt-8">
+            <img src="https://qr-official.line.me/gs/M_305urthc_GW.png?oat_content=url&ts=10201911" alt="LINE QR"
+                 class="mx-auto w-36 h-36 border border-primary1/30 rounded-lg">
+        </div>
     </div>
 </section>
+
 </body>
 </html>

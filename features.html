@@ -5,25 +5,70 @@
     <title>Flow AI — Features</title>
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary1: '#00E5FF',
+                        primary2: '#B400FF',
+                        darkbg: '#0A0F1F'
+                    },
+                    fontFamily: {
+                        title: ['Montserrat', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-darkbg text-white font-body">
-<section class="container mx-auto px-6 py-20">
-    <h1 class="text-4xl font-title mb-10">Core Features</h1>
 
-    <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-darkbg border border-primary1/30 p-6 rounded-lg hover:border-primary2 transition">
+<body class="bg-darkbg text-white font-body">
+
+<!-- HEADER -->
+<header class="w-full fixed top-0 bg-darkbg/80 backdrop-blur-lg border-b border-primary2/20 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo.png" class="h-10" alt="Flow AI Logo">
+
+        </a>
+        <nav class="hidden md:flex gap-6 font-body">
+            <a href="technology.html" class="hover:text-primary1 transition">Technology</a>
+            <a href="features.html" class="text-primary1">Features</a>
+            <a href="about.html" class="hover:text-primary1 transition">About</a>
+        </nav>
+    </div>
+</header>
+
+<!-- CONTENT -->
+<section class="container mx-auto px-6 pt-28 pb-20 text-center">
+    <h1 class="text-5xl font-title bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent mb-10">Core Features</h1>
+    <p class="text-gray-400 max-w-2xl mx-auto mb-16">Flow AI merges cutting-edge IoT components with intelligent data handling, providing a complete pipeline from sensors to AI-driven insights.</p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 hover:shadow-[0_0_25px_#00E5FF40] transition">
             <h2 class="font-title text-xl mb-3 text-primary1">Sensor Fusion Engine</h2>
-            <p class="text-gray-300">Multi-sensor logic to achieve high precision detection...</p>
+            <p class="text-gray-300">Integrates ultrasonic, infrared, and motion sensors to ensure precise detection of people and movement direction.</p>
         </div>
-        <div class="bg-darkbg border border-primary1/30 p-6 rounded-lg hover:border-primary2 transition">
+
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 hover:shadow-[0_0_25px_#00E5FF40] transition">
             <h2 class="font-title text-xl mb-3 text-primary1">UART Sync</h2>
-            <p class="text-gray-300">True STM32 <-> Raspberry Pi cooperation...</p>
+            <p class="text-gray-300">Real-time, low-latency communication between STM32 and Raspberry Pi via UART, ensuring accurate synchronization.</p>
         </div>
-        <div class="bg-darkbg border border-primary1/30 p-6 rounded-lg hover:border-primary2 transition">
+
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 hover:shadow-[0_0_25px_#00E5FF40] transition">
             <h2 class="font-title text-xl mb-3 text-primary1">AI Ready Pipeline</h2>
-            <p class="text-gray-300">Designed for anomaly detection, ML events & dashboards...</p>
+            <p class="text-gray-300">Processed sensor data is structured for ML models to detect anomalies, predict flow density, and optimize routes.</p>
+        </div>
+
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 hover:shadow-[0_0_25px_#00E5FF40] transition">
+            <h2 class="font-title text-xl mb-3 text-primary1">LINE Chatbot Integration</h2>
+            <p class="text-gray-300 mb-4">Interact with the system via LINE to check occupancy, sensor stats, and alerts in real-time.</p>
+            <a href="https://line.me/R/ti/p/@305urthc?oat_content=url&ts=10201911" class="text-primary1 font-semibold hover:text-primary2 transition">Try it now →</a>
         </div>
     </div>
 </section>
+
 </body>
 </html>

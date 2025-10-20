@@ -6,7 +6,6 @@
     <title>Flow AI — Real-Time People Flow Intelligence</title>
     <link rel="icon" type="image/png" href="assets/favicon.png" />
 
-    <!-- TAILWIND CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -15,8 +14,7 @@
                     colors: {
                         primary1: '#00E5FF',
                         primary2: '#B400FF',
-                        darkbg: '#0A0F1F',
-                        glow: '#7A00FF'
+                        darkbg: '#0A0F1F'
                     },
                     fontFamily: {
                         title: ['Montserrat', 'sans-serif'],
@@ -26,42 +24,53 @@
             }
         }
     </script>
-
-    <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
+
 <body class="bg-darkbg text-white font-body">
 
-<!-- NAVBAR -->
 <header class="w-full fixed top-0 bg-darkbg/80 backdrop-blur-lg border-b border-primary2/20 z-50">
     <div class="container mx-auto flex items-center justify-between py-4 px-6">
         <a href="index.html" class="flex items-center gap-3">
             <img src="assets/logo.png" class="h-10" alt="Flow AI Logo">
-            <span class="text-white font-title text-xl tracking-widest">FLOW AI</span>
+
         </a>
         <nav class="hidden md:flex gap-6 font-body">
             <a href="technology.html" class="hover:text-primary1 transition">Technology</a>
             <a href="features.html" class="hover:text-primary1 transition">Features</a>
-            <a href="about.html" class="hover:text-primary1 transition">About Project</a>
+            <a href="about.html" class="hover:text-primary1 transition">About</a>
         </nav>
     </div>
 </header>
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center text-center px-6">
-    <div>
+<section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+    <div class="mt-16">
         <h1 class="font-title text-5xl md:text-6xl font-bold">
-        <span class="bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent">
-          Real-Time IoT People Flow Intelligence
-        </span>
+      <span class="bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent">
+        Real-Time IoT People Flow Intelligence
+      </span>
         </h1>
         <p class="mt-6 text-lg text-gray-300 max-w-2xl mx-auto">
             Dual architecture: <span class="text-primary1">STM32</span> for real-time sensor acquisition +
-            <span class="text-primary2">Raspberry Pi</span> for logic, data aggregation and AI-ready analytics.
+            <span class="text-primary2">Raspberry Pi</span> for data logic, aggregation, and AI-ready analytics.
         </p>
+
         <a href="technology.html" class="mt-8 inline-block px-8 py-3 rounded-full bg-gradient-to-r from-primary1 to-primary2 text-darkbg font-bold shadow-lg hover:scale-105 transition">
             View System Architecture →
         </a>
+
+        <div class="mt-10">
+            <h3 class="text-xl font-semibold text-primary1 mb-2">Talk to Flow AI</h3>
+            <p class="text-gray-400 mb-4">Chat with our LINE bot for live system data and AI insights.</p>
+            <a href="https://line.me/R/ti/p/@305urthc?oat_content=url&ts=10201911"
+               class="inline-block bg-primary1 text-darkbg px-6 py-3 rounded-full font-bold hover:bg-primary2 transition">
+                Chat on LINE
+            </a>
+            <div class="mt-6">
+                <img src="https://qr-official.line.me/gs/M_305urthc_GW.png?oat_content=url&ts=10201911"
+                     alt="LINE Chatbot QR" class="mx-auto w-40 h-40 rounded-lg border border-primary1/30">
+            </div>
+        </div>
     </div>
 </section>
 
