@@ -84,7 +84,7 @@
         </div>
     </div>
 </section>
-<!-- MISTRAL API BUTTON -->
+<!-- MISTRAL API BUTTON
 <div class="mt-16 text-center">
     <h2 class="text-2xl font-title mb-4 text-primary1">Mistral AI Integration</h2>
     <p class="text-gray-400 mb-6">Flow AI can connect with the Mistral API to analyze IoT data or generate intelligent reports in real time.</p>
@@ -93,7 +93,51 @@
        class="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-primary1 to-primary2 text-darkbg font-bold shadow-lg hover:scale-105 transition">
         Connect to Mistral API →
     </a>
+</div>-->
+<!-- Floating Chat Button -->
+<button id="chatBtn"
+        class="fixed bottom-6 right-6 bg-gradient-to-r from-primary1 to-primary2 p-4 rounded-full shadow-lg hover:scale-110 transition z-50">
+    💬
+</button>
+
+<!-- Chatbox -->
+<div id="chatBox" class="hidden fixed bottom-20 right-6 w-80 bg-darkbg border border-primary1/30 rounded-2xl shadow-lg flex flex-col z-50">
+    <div class="p-3 border-b border-primary1/20 text-primary1 font-bold">Flow AI Assistant</div>
+    <div id="chatMessages" class="flex-1 p-3 overflow-y-auto text-sm text-gray-200 space-y-2"></div>
+    <form id="chatForm" class="p-3 flex gap-2 border-t border-primary1/20">
+        <input id="chatInput" type="text" placeholder="Ask something..." class="flex-1 bg-darkbg border border-primary1/20 rounded px-3 py-2 focus:outline-none">
+        <button class="bg-gradient-to-r from-primary1 to-primary2 px-3 py-2 rounded text-darkbg font-bold">→</button>
+    </form>
 </div>
+
+<script>
+    const chatBtn = document.getElementById('chatBtn');
+    const chatBox = document.getElementById('chatBox');
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('chatInput');
+    const messages = document.getElementById('chatMessages');
+
+    chatBtn.addEventListener('click', () => chatBox.classList.toggle('hidden'));
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userMsg = input.value.trim();
+        if (!userMsg) return;
+        messages.innerHTML += `<div class='text-primary1'>You: ${userMsg}</div>`;
+        input.value = '';
+
+        const res = await fetch('https://iot-sem2-v2-gijw7q00j-leos-projects-b4ef3ef0.vercel.app/', { // 🔹 ton URL proxy
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMsg })
+        });
+        const data = await res.json();
+        const botReply = data.choices?.[0]?.message?.content || "Error fetching response.";
+        messages.innerHTML += `<div class='text-gray-300'>🤖 ${botReply}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+    });
+</script>
+
 
 </body>
 </html>
