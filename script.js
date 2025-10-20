@@ -27,7 +27,7 @@ if (form) {
         const subject = encodeURIComponent('Contact depuis MonSite');
         const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
         // ⚠️ Remplace l’adresse ci-dessous par la tienne
-        window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:leo.michard@gmail.com?subject=${subject}&body=${body}`;
         if (msg) msg.textContent = 'Ouverture de votre application mail…';
     });
 }
