@@ -123,17 +123,26 @@
         e.preventDefault();
         const userMsg = input.value.trim();
         if (!userMsg) return;
+
+        // 🧠 Affiche ton message
         messages.innerHTML += `<div class='text-primary1'>You: ${userMsg}</div>`;
         input.value = '';
 
-        const res = await fetch('https://iot-sem2-v2-o1p03lfz7-flow-ai-iot.vercel.app/', { // 🔹 ton URL proxy
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMsg })
-        });
-        const data = await res.json();
-        const botReply = data.choices?.[0]?.message?.content || "Error fetching response.";
-        messages.innerHTML += `<div class='text-gray-300'>🤖 ${botReply}</div>`;
+        try {
+            // 🚀 Envoi vers ton API Vercel
+            const res = await fetch("https://iot-sem2-v2-o1p03lfz7-flow-ai-iot.vercel.app/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMsg }) // 👈 important !
+            });
+
+            const data = await res.json();
+            const botReply = data?.choices?.[0]?.message?.content || data.error || "No response from AI 🤖";
+            messages.innerHTML += `<div class='text-gray-300'>🤖 ${botReply}</div>`;
+        } catch (err) {
+            messages.innerHTML += `<div class='text-red-400'>⚠️ Error: ${err.message}</div>`;
+        }
+
         messages.scrollTop = messages.scrollHeight;
     });
 </script>
