@@ -1,6 +1,13 @@
 export default async function handler(req, res) {
-    // --- ✅ Autoriser CORS pour les appels front externes ---
+    // --- DEBUG LOGS ---
+    console.log("🟣 Incoming request:");
+    console.log("➡️ Method:", req.method);
+    console.log("➡️ Origin:", req.headers.origin);
+    console.log("➡️ Headers:", req.headers);
+
+    // --- CORS HANDLING ---
     if (req.method === 'OPTIONS') {
+        console.log("🟢 OPTIONS preflight received");
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -12,23 +19,33 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     try {
-        // --- ✅ Parse du body ---
-        const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body;
-        const { message } = body || {};
+        // --- PARSE BODY ---
+        const raw = req.body || '';
+        let body;
+        try {
+            body = typeof raw === 'string' ? JSON.parse(raw || '{}') : raw;
+        } catch (err) {
+            console.error("⚠️ Failed to parse body:", raw);
+            return res.status(400).json({ error: "Invalid JSON body." });
+        }
 
+        console.log("🧩 Parsed body:", body);
+
+        const message = body.message;
         if (!message) {
-            console.log("❌ No message received");
+            console.log("❌ No message provided");
             return res.status(400).json({ error: 'Missing message in request body.' });
         }
 
-        // --- ✅ Vérifie la clé Mistral ---
+        // --- CHECK API KEY ---
         const apiKey = process.env.MISTRAL_API_KEY;
         if (!apiKey) {
-            console.error("❌ Missing MISTRAL_API_KEY");
+            console.error("❌ Missing MISTRAL_API_KEY in environment variables");
             return res.status(500).json({ error: 'Server misconfiguration: API key missing.' });
         }
 
-        // --- ✅ Appel API Mistral ---
+        // --- CALL MISTRAL API ---
+        console.log("📡 Sending request to Mistral...");
         const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -41,9 +58,10 @@ export default async function handler(req, res) {
             })
         });
 
-        // --- ✅ Retour de la réponse ---
+        console.log("📬 Mistral response status:", response.status);
         const data = await response.json();
-        console.log("✅ Mistral response:", data);
+        console.log("✅ Mistral API response:", data);
+
         return res.status(200).json(data);
 
     } catch (err) {
