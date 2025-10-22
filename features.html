@@ -130,10 +130,10 @@
 
         try {
             // 🚀 Envoi vers ton API Vercel
-            const res = await fetch("https://iot-sem2-v2-o1p03lfz7-flow-ai-iot.vercel.app/", {
+            const res = await fetch("https://iot-sem2-v2-flow-ai-iot.vercel.app/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMsg }) // 👈 important !
+                body: JSON.stringify({ message: userMsg })
             });
 
             const data = await res.json();
