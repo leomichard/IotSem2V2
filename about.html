@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Flow AI — About</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -42,9 +42,11 @@
 
 <!-- CONTENT -->
 <section class="container mx-auto px-6 pt-28 pb-20">
-    <h1 class="text-5xl font-title bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent mb-8">About Flow AI</h1>
+    <h1 class="text-5xl font-title bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent mb-8">About
+        Flow AI</h1>
     <p class="text-gray-300 max-w-3xl leading-relaxed mb-10">
-        Flow AI is an academic IoT project focused on real-time people flow monitoring through embedded systems, sensor fusion, and AI.
+        Flow AI is an academic IoT project focused on real-time people flow monitoring through embedded systems, sensor
+        fusion, and AI.
         The goal is to create smarter environments that understand and adapt to human movement.
     </p>
 
@@ -77,13 +79,22 @@
             </div>
         </div>
     </div>
+
+    <!-- Floating Chat Button -->
+    <button id="chatBtn"
+            class="fixed bottom-6 right-6 bg-gradient-to-r from-primary1 to-primary2 p-4 rounded-full shadow-lg hover:scale-110 transition z-50">
+        💬 - Need Help ?
+    </button>
+
 </section>
 <!-- Chatbox -->
-<div id="chatBox" class="hidden fixed bottom-20 right-6 w-80 bg-darkbg border border-primary1/30 rounded-2xl shadow-lg flex flex-col z-50">
+<div id="chatBox"
+     class="hidden fixed bottom-20 right-6 w-80 bg-darkbg border border-primary1/30 rounded-2xl shadow-lg flex flex-col z-50">
     <div class="p-3 border-b border-primary1/20 text-primary1 font-bold">Flow AI Assistant</div>
     <div id="chatMessages" class="flex-1 p-3 overflow-y-auto text-sm text-gray-200 space-y-2"></div>
     <form id="chatForm" class="p-3 flex gap-2 border-t border-primary1/20">
-        <input id="chatInput" type="text" placeholder="Ask something..." class="flex-1 bg-darkbg border border-primary1/20 rounded px-3 py-2 focus:outline-none">
+        <input id="chatInput" type="text" placeholder="Ask something..."
+               class="flex-1 bg-darkbg border border-primary1/20 rounded px-3 py-2 focus:outline-none">
         <button class="bg-gradient-to-r from-primary1 to-primary2 px-3 py-2 rounded text-darkbg font-bold">→</button>
     </form>
 </div>
@@ -110,8 +121,8 @@
             // 🚀 Envoi vers ton API Vercel
             const res = await fetch("https://iot-sem2-v2-flow-ai-iot.vercel.app/api/chat", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMsg })
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({message: userMsg})
             });
 
             const data = await res.json();
