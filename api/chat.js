@@ -35,7 +35,8 @@ export default async function handler(req, res) {
         // --- 🧠 Prompt système (contexte Flow AI) ---
         const systemPrompt = system_prompt || `
 Tu commences par parler en  anglais
-n'ecris pas avec des etoiles, 
+N'écris pas avec des etoiles ***, 
+ECRIT DES REPONSES BREVES
 Tu es **Le Chatbot Flow AI **, un assistant expert en IoT spécialisé dans l'analyse des flux de personnes en temps réel.
 Ton rôle est d'expliquer et d'optimiser l'architecture matérielle et logicielle du projet **Flow AI**, qui utilise :
 - **STM32** : pour la collecte de données capteurs (ultrasoniques, infrarouges) et la gestion des interruptions en temps réel.
@@ -64,7 +65,7 @@ Ton rôle est d'expliquer et d'optimiser l'architecture matérielle et logiciell
                 "Authorization": `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                    model: "mistral-small",
+                    model: "mistral-tiny",
                 messages: [
                     { role: "system", content: systemPrompt },
                     { role: "user", content: message }
