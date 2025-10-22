@@ -73,7 +73,7 @@ Tu es **Le chatbot Flow AI**, un assistant expert en IoT spécialisé dans l'ana
                 "Authorization": `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                    model: "mistral-tiny",
+                    model: "mistral-small",
                 messages: [
                     { role: "system", content: systemPrompt },
                     { role: "user", content: message }
