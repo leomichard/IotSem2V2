@@ -73,15 +73,51 @@
         </div>
     </div>
 </section>
-<!-- Floating LINE Chat Button -->
-<a href="https://line.me/R/ti/p/@305urthc?oat_content=url&ts=10201911"
-   target="_blank"
-   class="fixed bottom-6 right-6 bg-gradient-to-r from-primary1 to-primary2 p-4 rounded-full shadow-lg hover:scale-110 transition group animate-pulse z-50"
-   title="Chat with Flow AI on LINE">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="white" class="w-6 h-6">
-        <path d="M18 3C9.16 3 2 9.55 2 17c0 5.49 3.53 10.3 8.82 12.68-.11.39-.71 2.43-.74 2.59 0 0-.01.09 0 .13 0 .2.1.39.28.48.16.09.36.08.52-.02.21-.13 3.01-2.07 4.26-2.93C16.3 30.65 17.14 31 18 31c8.84 0 16-6.55 16-14S26.84 3 18 3z"/>
-    </svg>
-</a>
+<!-- Chatbox -->
+<div id="chatBox" class="hidden fixed bottom-20 right-6 w-80 bg-darkbg border border-primary1/30 rounded-2xl shadow-lg flex flex-col z-50">
+    <div class="p-3 border-b border-primary1/20 text-primary1 font-bold">Flow AI Assistant</div>
+    <div id="chatMessages" class="flex-1 p-3 overflow-y-auto text-sm text-gray-200 space-y-2"></div>
+    <form id="chatForm" class="p-3 flex gap-2 border-t border-primary1/20">
+        <input id="chatInput" type="text" placeholder="Ask something..." class="flex-1 bg-darkbg border border-primary1/20 rounded px-3 py-2 focus:outline-none">
+        <button class="bg-gradient-to-r from-primary1 to-primary2 px-3 py-2 rounded text-darkbg font-bold">→</button>
+    </form>
+</div>
 
+<script>
+    const chatBtn = document.getElementById('chatBtn');
+    const chatBox = document.getElementById('chatBox');
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('chatInput');
+    const messages = document.getElementById('chatMessages');
+
+    chatBtn.addEventListener('click', () => chatBox.classList.toggle('hidden'));
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userMsg = input.value.trim();
+        if (!userMsg) return;
+
+        // 🧠 Affiche ton message
+        messages.innerHTML += `<div class='text-primary1'>You: ${userMsg}</div>`;
+        input.value = '';
+
+        try {
+            // 🚀 Envoi vers ton API Vercel
+            const res = await fetch("https://iot-sem2-v2-flow-ai-iot.vercel.app/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMsg })
+            });
+
+            const data = await res.json();
+            const botReply = data?.choices?.[0]?.message?.content || data.error || "No response from AI 🤖";
+            messages.innerHTML += `<div class='text-gray-300'>🤖 ${botReply}</div>`;
+        } catch (err) {
+            messages.innerHTML += `<div class='text-red-400'>⚠️ Error: ${err.message}</div>`;
+        }
+
+        messages.scrollTop = messages.scrollHeight;
+    });
+</script>
 </body>
 </html>
