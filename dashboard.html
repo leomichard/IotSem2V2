@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Flow AI — Dashboard</title>
+    <title>Flow AI — Live Dashboard</title>
     <link rel="icon" type="image/png" href="assets/favicon.png"/>
 
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -31,84 +32,90 @@
 <header class="w-full fixed top-0 bg-darkbg/80 backdrop-blur-lg border-b border-primary2/20 z-50">
     <div class="container mx-auto flex items-center justify-between py-4 px-6">
         <a href="index.html" class="flex items-center gap-3">
-            <img src="assets/logo.png" class="h-10" alt="Flow AI Logo">
+            <img src="assets/logo.png" class="h-10">
+            <span class="font-title text-xl text-primary1">Flow AI</span>
         </a>
+
         <nav class="hidden md:flex gap-6 font-body">
-            <a href="technology.html" class="hover:text-primary1 transition">Technology</a>
-            <a href="features.html" class="hover:text-primary1 transition">Features</a>
-            <a href="about.html" class="hover:text-primary1 transition">About</a>
-            <a href="dashboard.html" class="text-primary1">Dashboard</a>
+            <a href="technology.html" class="hover:text-primary1">Technology</a>
+            <a href="features.html" class="hover:text-primary1">Features</a>
+            <a href="about.html" class="hover:text-primary1">About</a>
+            <a href="dashboard.html" class="text-primary1 font-semibold">Dashboard</a>
         </nav>
     </div>
 </header>
 
 <!-- CONTENT -->
 <section class="container mx-auto px-6 pt-28 pb-20">
+
     <h1 class="text-5xl font-title bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent mb-10">
-        Live IoT Dashboard
+        Real-Time IoT Dashboard
     </h1>
 
-    <p class="text-gray-300 mb-10 max-w-2xl">
-        Real-time values collected from the NETPIE IoT cloud.
-        Data refreshes automatically every <span class="text-primary1 font-semibold">2 seconds</span>.
+    <p class="text-gray-300 mb-10">
+        Live sensor data coming from your Raspberry Pi + STM32.
+        <br>Updated every second.
     </p>
 
-    <!-- LIVE DATA TABLE -->
-    <div class="border border-primary1/30 p-8 rounded-2xl bg-darkbg/40 mb-10">
-        <h2 class="text-2xl font-title text-primary1 mb-4">Live Data</h2>
+    <!-- GRID OF CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
 
-        <table class="w-full text-left">
-            <thead>
-            <tr class="text-primary1 border-b border-primary1/20">
-                <th class="py-2">Key</th>
-                <th class="py-2">Value</th>
-            </tr>
-            </thead>
-            <tbody id="dataTable" class="text-gray-300"></tbody>
-        </table>
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 text-center">
+            <h2 class="text-xl font-title text-primary1 mb-2">Temperature</h2>
+            <p id="valTemp" class="text-4xl font-bold">--</p>
+            <p class="text-gray-400 mt-2">°C</p>
+        </div>
+
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 text-center">
+            <h2 class="text-xl font-title text-primary1 mb-2">Humidity</h2>
+            <p id="valHumi" class="text-4xl font-bold">--</p>
+            <p class="text-gray-400 mt-2">%</p>
+        </div>
+
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 text-center">
+            <h2 class="text-xl font-title text-primary1 mb-2">Gas</h2>
+            <p id="valGas" class="text-4xl font-bold">--</p>
+        </div>
+
+        <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40 text-center">
+            <h2 class="text-xl font-title text-primary1 mb-2">Light (LDR)</h2>
+            <p id="valLight" class="text-4xl font-bold">--</p>
+        </div>
+
     </div>
 
     <!-- RAW JSON VIEW -->
-    <div class="border border-primary1/30 p-8 rounded-2xl bg-darkbg/40">
-        <h2 class="text-2xl font-title text-primary2 mb-4">Raw JSON</h2>
+    <div class="border border-primary1/30 p-6 rounded-2xl bg-darkbg/40">
+        <h2 class="text-2xl font-title text-primary2 mb-4">Raw JSON Data</h2>
         <pre id="jsonView" class="text-primary1 text-sm overflow-x-auto"></pre>
     </div>
+
 </section>
 
 <script>
-    const NETPIE_URL = "TON_URL_JSON_NETPIE_ICI"; // <---- Mets ton lien ici
-
-    async function loadNetpieData() {
+    async function updateDashboard() {
         try {
-            const res = await fetch(NETPIE_URL);
-            const json = await res.json();
+            const res = await fetch("http://192.168.1.239:5000/data");
+            const data = await res.json();
 
-            // --- RAW JSON ---
+            // update values
+            document.getElementById("valTemp").textContent = data.Temp;
+            document.getElementById("valHumi").textContent = data.Humi;
+            document.getElementById("valGas").textContent  = data.Gas;
+            document.getElementById("valLight").textContent = data.LDRPct;
+
+            // raw json shown below
             document.getElementById("jsonView").textContent =
-                JSON.stringify(json, null, 2);
-
-            // --- TABLE DATA ---
-            const table = document.getElementById("dataTable");
-            table.innerHTML = ""; // reset
-
-            for (const key in json) {
-                table.innerHTML += `
-                    <tr class="border-b border-primary1/10">
-                        <td class="py-2 text-primary1">${key}</td>
-                        <td class="py-2">${json[key]}</td>
-                    </tr>
-                `;
-            }
+                JSON.stringify(data, null, 2);
 
         } catch (err) {
-            console.error(err);
-            document.getElementById("jsonView").textContent = "Error fetching NETPIE data.";
+            document.getElementById("jsonView").textContent = "Error: " + err;
         }
     }
 
-    // Update every 2 seconds
-    setInterval(loadNetpieData, 2000);
-    loadNetpieData();
+    // update every 1 second
+    setInterval(updateDashboard, 1000);
+    updateDashboard();
 </script>
 
 </body>
