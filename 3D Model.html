@@ -1,13 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>3D Models</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-</head>
-<body>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flow AI — 3D Models</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
 
-<model-viewer src="C:\Users\leomi\Downloads\shapr3d_export_2026-01-05_09h58m.glb" alt="Modèle 3D" auto-rotate
-              camera-controls class="w-full h-[400px]"></model-viewer>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary1: '#00E5FF',
+                        primary2: '#B400FF',
+                        darkbg: '#0A0F1F'
+                    },
+                    fontFamily: {
+                        title: ['Montserrat', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Model Viewer -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+        model-viewer {
+            width: 100%;
+            height: 520px;
+            background: rgba(10, 15, 31, 0.4);
+            border-radius: 24px;
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="bg-darkbg text-white font-body">
+
+<!-- HEADER -->
+<header class="w-full fixed top-0 bg-darkbg/80 backdrop-blur-lg border-b border-primary2/20 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo.png" class="h-10" alt="Flow AI Logo">
+        </a>
+
+        <nav class="hidden md:flex gap-6 font-body">
+            <a href="technology.html" class="hover:text-primary1 transition">Technology</a>
+            <a href="features.html" class="hover:text-primary1 transition">Features</a>
+            <a href="about.html" class="hover:text-primary1 transition">About</a>
+            <a href="3D Model.html" class="text-primary1 font-semibold">3D Model</a>
+            <a href="dashboard.html" class="hover:text-primary1 transition">Dashboard</a>
+        </nav>
+    </div>
+</header>
+
+<!-- CONTENT -->
+<section class="container mx-auto px-6 pt-28 pb-20">
+    <h1 class="text-5xl font-title bg-gradient-to-r from-primary1 to-primary2 bg-clip-text text-transparent mb-6">
+        3D Components Viewer
+    </h1>
+    <p class="text-gray-300 max-w-3xl leading-relaxed mb-10">
+        Explore each hardware component used in Flow AI directly in 3D (rotate, zoom, inspect).
+    </p>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Left panel -->
+        <div class="lg:col-span-1 border border-primary1/30 p-6 rounded-2xl bg-darkbg/40">
+            <h2 class="text-2xl font-title text-primary1 mb-4">Select a component</h2>
+
+            <label class="block text-gray-300 mb-2" for="modelSelect">Component</label>
+            <select id="modelSelect"
+                    class="w-full bg-darkbg border border-primary1/20 rounded-xl px-4 py-3 focus:outline-none">
+                <option value="assets/models/stm32.glb">STM32 Board</option>
+                <option value="assets/models/raspberrypi.glb">Raspberry Pi</option>
+                <option value="assets/models/sensor_ultrasonic.glb">Ultrasonic Sensor</option>
+                <option value="assets/models/RaspberryPiCam.glb">Raspberry Pi Camera</option>
+            </select>
+
+            <div class="mt-6 space-y-3">
+                <button id="btnAutoRotate"
+                        class="w-full bg-gradient-to-r from-primary1 to-primary2 text-darkbg px-5 py-3 rounded-xl font-bold hover:scale-[1.02] transition">
+                    Toggle Auto-Rotate
+                </button>
+
+                <button id="btnReset"
+                        class="w-full border border-primary1/30 text-primary1 px-5 py-3 rounded-xl font-semibold hover:bg-primary1/10 transition">
+                    Reset View
+                </button>
+            </div>
+
+            <div class="mt-8 text-sm text-gray-400 leading-relaxed">
+                Tips:
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li>Left click + drag: rotate</li>
+                    <li>Scroll: zoom</li>
+                    <li>Right click + drag: pan</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Viewer -->
+        <div class="lg:col-span-2">
+            <model-viewer
+                    id="viewer"
+                    src="assets/models/stm32.glb"
+                    alt="3D model"
+                    camera-controls
+                    auto-rotate
+                    shadow-intensity="1"
+                    exposure="1"
+                    ar
+            >
+            </model-viewer>
+
+            <p id="modelLabel" class="mt-4 text-gray-300">
+                Currently viewing: <span class="text-primary1 font-semibold">STM32 Board</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    const select = document.getElementById('modelSelect');
+    const viewer = document.getElementById('viewer');
+    const label = document.getElementById('modelLabel');
+
+    const btnAutoRotate = document.getElementById('btnAutoRotate');
+    const btnReset = document.getElementById('btnReset');
+
+    function getSelectedText() {
+        return select.options[select.selectedIndex]?.textContent || "Component";
+    }
+
+    select.addEventListener('change', () => {
+        viewer.src = select.value; // <-- chemin relatif vers assets/models/...
+        label.innerHTML = `Currently viewing: <span class="text-primary1 font-semibold">${getSelectedText()}</span>`;
+    });
+
+    btnAutoRotate.addEventListener('click', () => {
+        if (viewer.hasAttribute('auto-rotate')) viewer.removeAttribute('auto-rotate');
+        else viewer.setAttribute('auto-rotate', '');
+    });
+
+    btnReset.addEventListener('click', () => {
+        // reset orientation / camera to default
+        viewer.resetTurntableRotation?.();
+        viewer.resetCameraOrbit?.();
+        viewer.jumpCameraToGoal?.();
+    });
+</script>
+
 </body>
 </html>
